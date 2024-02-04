@@ -9,8 +9,13 @@ import {
 } from "@remix-run/react";
 
 import styles from "./tailwind.css";
+import OpenAI from "openai";
 
 export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
+
+export const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 export default function App() {
   return (
@@ -21,7 +26,13 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body
+        style={{
+          fontFamily: "Lucida, Helvetica, sans-serif",
+          fontVariant: "small-caps",
+        }}
+        className="bg-blue-300 font-medium w-full min-h-[100vh] flex flex-col items-center"
+      >
         <Outlet />
         <ScrollRestoration />
         <Scripts />
