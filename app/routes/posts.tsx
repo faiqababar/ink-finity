@@ -5,6 +5,7 @@ import { Footer } from "~/components/Footer";
 import { Header } from "~/components/Header";
 
 import { getPosts } from "~/models/post";
+import { removeQuotes } from "~/utils";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   return json({ posts: await getPosts() });
@@ -20,11 +21,12 @@ export default function Posts() {
         {posts?.map(({ id, title, image }) => {
           return (
             <a
+              key={id}
               href={`/post/${id}`}
               className="flex gap-2 bg-white p-2 items-center rounded-md border-[1.5px] border-black"
             >
               <img src={image} alt="post-image" width={50} height={50} />
-              <p className="text-md">{title}</p>
+              <p className="text-md">{removeQuotes(title)}</p>
             </a>
           );
         })}

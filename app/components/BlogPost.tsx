@@ -1,4 +1,5 @@
 import React from "react";
+import { removeQuotes } from "~/utils";
 
 type BlogPostProps = {
   title: string;
@@ -10,7 +11,7 @@ export default function BlogPost({ title, markdown, image }: BlogPostProps) {
   return (
     <div className="flex bg-white mt-4 flex-col justify-center items-center w-full border-black border-[1.5px] rounded-lg p-2">
       <p className="p-2 font-roboto font-semibold text-md text-center">
-        {title}
+        {removeQuotes(title)}
       </p>
       <img
         className="mt-2"
