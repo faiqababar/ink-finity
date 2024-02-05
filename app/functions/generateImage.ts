@@ -1,6 +1,6 @@
 import { openai } from "~/root";
 
-export const getImage = async (topic: string) => {
+export const generateImage = async (topic: string) => {
   const imageResponse = await openai.images.generate({
     prompt: "A beautiful modern photo of " + topic + ".",
     n: 1,

@@ -1,6 +1,6 @@
 import { openai } from "~/root";
 
-export const getArticle = async (topic: string) => {
+export const generateArticle = async (topic: string) => {
   const articleResponse = await openai.chat.completions.create({
     model: "gpt-3.5-turbo",
     messages: [
