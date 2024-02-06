@@ -1,4 +1,3 @@
-import { LoaderFunctionArgs } from "@remix-run/node";
 import { json, useLoaderData } from "@remix-run/react";
 
 import { Footer } from "~/components/Footer";
@@ -7,7 +6,7 @@ import { Header } from "~/components/Header";
 import { getPosts } from "~/models/post";
 import { removeQuotes } from "~/utils";
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
+export const loader = async () => {
   return json({ posts: await getPosts() });
 };
 
