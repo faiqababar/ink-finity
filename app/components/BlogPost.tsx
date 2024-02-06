@@ -15,10 +15,10 @@ export default function BlogPost({ title, markdown, image }: BlogPostProps) {
       </p>
       <img
         className="mt-2"
-        src={image}
+        src={`data:image/jpeg;base64,${image}`}
         width={400}
         height={400}
-        alt="auto-generated-image"
+        alt={title}
       />
       <div className="mt-4 leading-4">
         {markdown

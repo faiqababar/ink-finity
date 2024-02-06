@@ -1,4 +1,4 @@
-import { defer, LoaderFunctionArgs } from "@remix-run/node";
+import { defer } from "@remix-run/node";
 import { Await, useLoaderData } from "@remix-run/react";
 
 import { Suspense } from "react";
@@ -10,7 +10,7 @@ import { generateImage } from "~/functions/generateImage";
 import { generateTitle } from "~/functions/generateTitle";
 import { createPost } from "~/models/post";
 
-export const loader = async ({}: LoaderFunctionArgs) => {
+export const loader = async () => {
   const title = await generateTitle();
 
   const [markdown, image] = await Promise.all([

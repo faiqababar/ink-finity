@@ -25,7 +25,12 @@ export default function Posts() {
               href={`/post/${id}`}
               className="flex gap-2 bg-white p-2 items-center rounded-md border-[1.5px] border-black"
             >
-              <img src={image} alt="post-image" width={50} height={50} />
+              <img
+                src={`data:image/jpeg;base64,${image}`}
+                alt={title}
+                width={50}
+                height={50}
+              />
               <p className="text-md">{removeQuotes(title)}</p>
             </a>
           );

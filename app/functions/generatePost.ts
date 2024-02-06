@@ -1,4 +1,3 @@
-import { openai } from "~/root";
 import { generateTitle } from "./generateTitle";
 import { generateArticle } from "./generateArticle";
 import { generateImage } from "./generateImage";
