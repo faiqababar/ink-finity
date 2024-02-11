@@ -3,7 +3,8 @@
     "remix.env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "app/utils/ai.server.ts"
+    "app/utils/ai.server.ts",
+    "app/scripts/generate-blog-cron.js"
   ],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],

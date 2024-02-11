@@ -1,13 +1,28 @@
+import { ActionFunction, redirect } from "@remix-run/node";
 import { json, useLoaderData } from "@remix-run/react";
-import { IntroPost } from "~/components/IntroPost";
 import { IntroSection } from "~/components/IntroSection";
 import { PostListItem } from "~/components/PostListItem";
 import { INRO_POSTS_COUNT } from "~/constants";
 
-import { getPosts } from "~/models/post";
+import { deletePost, getPosts } from "~/models/post";
 
 export const loader = async () => {
   return json({ posts: await getPosts() });
+};
+
+export const action: ActionFunction = async ({ request }) => {
+  const params = new URLSearchParams(await request.text());
+
+  const postId = params.get("id");
+  const method = params.get("_method");
+
+  if (postId && method === "delete") {
+    await deletePost(postId);
+
+    return redirect("/blog/posts");
+  }
+
+  return json({ error: "Invalid method" }, { status: 405 });
 };
 
 export default function Posts() {
@@ -25,6 +40,7 @@ export default function Posts() {
           ?.slice(INRO_POSTS_COUNT)
           ?.map(({ id, title: _title, image, markdown }) => (
             <PostListItem
+              key={id}
               id={id}
               title={_title}
               image={image}

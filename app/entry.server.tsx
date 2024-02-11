@@ -23,6 +23,7 @@ export default function handleRequest(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   loadContext: AppLoadContext
 ) {
+  responseHeaders.set("Cache-Control", "public, s-maxage=60");
   return isbot(request.headers.get("user-agent") || "")
     ? handleBotRequest(
         request,

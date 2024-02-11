@@ -33,10 +33,23 @@ export async function getPost(id: string) {
   return post;
 }
 
+export async function deletePost(id: string) {
+  await prisma.$connect();
+
+  await prisma.post.delete({
+    where: {
+      id,
+    },
+  });
+
+  prisma.$disconnect();
+}
+
 export async function getPosts() {
   await prisma.$connect();
 
   const posts = await prisma.post.findMany({
+    take: 20,
     orderBy: {
       createdAt: "desc",
     },

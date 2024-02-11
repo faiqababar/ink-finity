@@ -6,9 +6,9 @@ export const generateArticle = async (topic: string) => {
     model: CHAT_GPT_MODEL,
     messages: [
       {
-        role: "user",
+        role: "system",
         content:
-          "Write compelling and natural 1000 words in english language in short paragraphs about " +
+          "Write an interesting, explorative, philosophical and unconventional blog post about 1200 words in short paragraphs about " +
           topic,
       },
     ],

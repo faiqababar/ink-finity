@@ -9,7 +9,7 @@ type BlogPost = {
 
 export const IntroSection = ({ posts }: { posts: BlogPost[] }) => {
   return (
-    <div className="flex gap-6 border-b border-2 border-black">
+    <div className="flex gap-6 border-t border-b border-2 border-black">
       <div className="flex flex-col gap-4 w-1/4">
         <IntroPost
           id={posts[1].id}

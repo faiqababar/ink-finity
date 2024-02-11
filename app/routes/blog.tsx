@@ -6,7 +6,7 @@ export default function Blog() {
   return (
     <div className="w-full flex flex-col overflow-auto justify-center items-center">
       <Header />
-      <div className="flex flex-col gap-2 mt-[80px] w-full">
+      <div className="flex flex-col gap-2 mt-[86px] w-full">
         <Outlet />
       </div>
       <Footer />

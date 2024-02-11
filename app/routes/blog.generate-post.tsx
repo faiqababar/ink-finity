@@ -3,43 +3,14 @@ import { Await, useLoaderData } from "@remix-run/react";
 
 import { Suspense } from "react";
 import BlogPost from "~/components/BlogPost";
-import { generateArticle } from "~/functions/generateArticle";
-import { generateCategories } from "~/functions/generateCategories";
-import { generateImage } from "~/functions/generateImage";
-import { generateTitle } from "~/functions/generateTitle";
-import { createPost } from "~/models/post";
-import { topics } from "~/utils";
+
+import { generatePost } from "~/functions/generatePost";
 
 export const loader = async () => {
-  const topic = topics[Math.floor(Math.random() * topics.length)];
-
-  const [title, categories] = await Promise.all([
-    generateTitle(topic),
-    generateCategories(topic),
-  ]);
-
-  const [markdown, image] = await Promise.all([
-    generateArticle(title),
-    generateImage(categories),
-  ]);
-
-  const categoriesArr = categories.split(",").map((c) => c.trim());
-
-  await createPost({
-    title,
-    markdown,
-    image: image ?? "",
-    categories: categoriesArr,
-  });
+  const post = await generatePost();
 
   return defer({
-    post: {
-      title,
-      markdown,
-      image,
-      createdAt: new Date(),
-      categories: categoriesArr,
-    },
+    post,
   });
 };
 
