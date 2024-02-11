@@ -5,14 +5,11 @@
  */
 
 import { PassThrough } from "node:stream";
-import { config } from "dotenv";
 import type { AppLoadContext, EntryContext } from "@remix-run/node";
 import { createReadableStreamFromReadable } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import { isbot } from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
-import cron from "node-cron";
-import { generatePost } from "./functions/generatePost";
 
 const ABORT_DELAY = 5_000;
 
@@ -140,8 +137,3 @@ function handleBrowserRequest(
     setTimeout(abort, ABORT_DELAY);
   });
 }
-
-cron.schedule("0 * * * *", async () => {
-  console.log("----Running a job every hour", new Date());
-  generatePost();
-});
