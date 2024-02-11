@@ -6,6 +6,7 @@ type BlogPostProps = {
   markdown: string;
   createdAt: Date;
   image?: string;
+  categories: string[];
 };
 
 export default function BlogPost({
@@ -13,10 +14,11 @@ export default function BlogPost({
   markdown,
   image,
   createdAt,
+  categories,
 }: BlogPostProps) {
   return (
     <div className="flex bg-white flex-col justify-center items-center w-full p-4">
-      <p className="font-bold text-3xl py-4 text-center border-b-black border-b-2">
+      <p className="font-bold text-3xl py-4 px-[100px] text-center border-b-black border-b-2">
         {removeQuotes(title)}
       </p>
 
@@ -24,6 +26,16 @@ export default function BlogPost({
         <span>{createdAt.toLocaleString().split("T")[0]}</span>
         <span> | </span>
         <span>{getMinuteRead(markdown)} minute read</span>
+      </div>
+      <div className="flex gap-1 mt-3">
+        {categories.map((category) => (
+          <div
+            key={category}
+            className="bg-black text-sm text-white px-2 py-1 rounded-xl"
+          >
+            {category.trim()}
+          </div>
+        ))}
       </div>
       <img
         className="mt-4 px-16"

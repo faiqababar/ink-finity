@@ -10,6 +10,7 @@ export async function createPost(input: Prisma.PostUncheckedCreateInput) {
       title: input.title,
       markdown: input.markdown,
       image: input.image,
+      categories: input.categories,
     },
   });
 
@@ -35,7 +36,11 @@ export async function getPost(id: string) {
 export async function getPosts() {
   await prisma.$connect();
 
-  const posts = await prisma.post.findMany();
+  const posts = await prisma.post.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
   if (!posts.length) return null;
 
   prisma.$disconnect();

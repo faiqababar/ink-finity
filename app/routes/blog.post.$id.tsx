@@ -20,7 +20,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 
 export default function Post() {
   const {
-    post: { title, markdown, image, createdAt },
+    post: { title, markdown, image, createdAt, categories },
   } = useLoaderData<typeof loader>();
 
   return (
@@ -29,6 +29,7 @@ export default function Post() {
       markdown={markdown}
       image={image}
       createdAt={createdAt}
+      categories={categories}
     />
   );
 }

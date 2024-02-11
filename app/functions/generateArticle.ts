@@ -8,7 +8,7 @@ export const generateArticle = async (topic: string) => {
       {
         role: "user",
         content:
-          "Write compelling and natural 800 words in english language in short paragraphs about " +
+          "Write compelling and natural 1000 words in english language in short paragraphs about " +
           topic,
       },
     ],
