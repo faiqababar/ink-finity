@@ -1,26 +1,38 @@
 import React from "react";
-import { removeQuotes } from "~/utils";
+import { getMinuteRead, removeQuotes } from "~/utils";
 
 type BlogPostProps = {
   title: string;
   markdown: string;
+  createdAt: Date;
   image?: string;
 };
 
-export default function BlogPost({ title, markdown, image }: BlogPostProps) {
+export default function BlogPost({
+  title,
+  markdown,
+  image,
+  createdAt,
+}: BlogPostProps) {
   return (
-    <div className="flex bg-white mt-4 flex-col justify-center items-center w-full border-black border-[1.5px] rounded-lg p-2">
-      <p className="p-2 font-roboto font-semibold text-md text-center">
+    <div className="flex bg-white flex-col justify-center items-center w-full p-4">
+      <p className="font-bold text-3xl py-4 text-center border-b-black border-b-2">
         {removeQuotes(title)}
       </p>
+
+      <div className="flex gap-2 mt-3">
+        <span>{createdAt.toLocaleString().split("T")[0]}</span>
+        <span> | </span>
+        <span>{getMinuteRead(markdown)} minute read</span>
+      </div>
       <img
-        className="mt-2"
+        className="mt-4 px-16"
         src={`data:image/jpeg;base64,${image}`}
-        width={400}
-        height={400}
         alt={title}
+        height={600}
+        width={900}
       />
-      <div className="mt-4 leading-4">
+      <div className="mt-4 text-sm leading-4 text-gray-700 px-10">
         {markdown
           .split("\n")
           .slice(1)
@@ -31,8 +43,6 @@ export default function BlogPost({ title, markdown, image }: BlogPostProps) {
             </React.Fragment>
           ))}
       </div>
-
-      <p className="mt-4">Word count: {markdown.split(" ").length}</p>
     </div>
   );
 }

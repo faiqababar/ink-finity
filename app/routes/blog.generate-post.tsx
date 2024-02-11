@@ -19,7 +19,7 @@ export const loader = async () => {
   await createPost({ title, markdown, image: image ?? "" });
 
   return defer({
-    post: { title, markdown, image },
+    post: { title, markdown, image, createdAt: new Date() },
   });
 };
 
@@ -30,8 +30,15 @@ export default function GeneratePost() {
     <Suspense fallback={<div>Loading...</div>}>
       <Await resolve={data}>
         {(data) => {
-          const { title, markdown, image } = data.post;
-          return <BlogPost title={title} markdown={markdown} image={image} />;
+          const { title, markdown, image, createdAt } = data.post;
+          return (
+            <BlogPost
+              title={title}
+              markdown={markdown}
+              image={image}
+              createdAt={new Date(createdAt)}
+            />
+          );
         }}
       </Await>
     </Suspense>

@@ -13,20 +13,22 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 
   const post = await getPost(id);
 
-  return json(
-    {
-      post,
-    },
-    {
-      headers: { "Cache-Control": "public, max-age=3600" },
-    }
-  );
+  return json({
+    post,
+  });
 };
 
 export default function Post() {
   const {
-    post: { title, markdown, image },
+    post: { title, markdown, image, createdAt },
   } = useLoaderData<typeof loader>();
 
-  return <BlogPost title={title} markdown={markdown} image={image} />;
+  return (
+    <BlogPost
+      title={title}
+      markdown={markdown}
+      image={image}
+      createdAt={createdAt}
+    />
+  );
 }

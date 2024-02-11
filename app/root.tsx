@@ -28,10 +28,9 @@ export default function App() {
       </head>
       <body
         style={{
-          fontFamily: "Lucida, Helvetica, sans-serif",
-          fontVariant: "small-caps",
+          fontFamily: "monospace, roboto, sans-serif",
         }}
-        className="bg-blue-300 font-medium w-full min-h-[100vh] flex flex-col items-center"
+        className="bg-white font-medium w-full flex flex-col items-center"
       >
         <Outlet />
         <ScrollRestoration />

@@ -1,39 +1,37 @@
 import { json, useLoaderData } from "@remix-run/react";
+import { IntroPost } from "~/components/IntroPost";
+import { IntroSection } from "~/components/IntroSection";
+import { PostListItem } from "~/components/PostListItem";
+import { INRO_POSTS_COUNT } from "~/constants";
 
 import { getPosts } from "~/models/post";
-import { removeQuotes } from "~/utils";
 
 export const loader = async () => {
-  return json(
-    { posts: await getPosts() },
-    {
-      headers: { "Cache-Control": "public, max-age=3600" },
-    }
-  );
+  return json({ posts: await getPosts() });
 };
 
 export default function Posts() {
   const { posts } = useLoaderData<typeof loader>();
 
+  const introPosts = posts?.slice(0, INRO_POSTS_COUNT) ?? [];
+
   return (
-    <>
-      {posts?.map(({ id, title, image }) => {
-        return (
-          <a
-            key={id}
-            href={`/blog/post/${id}`}
-            className="flex gap-2 bg-white p-2 items-center rounded-md border-[1.5px] border-black"
-          >
-            <img
-              src={`data:image/jpeg;base64,${image}`}
-              alt={title}
-              width={50}
-              height={50}
+    <div className="px-16 py-4">
+      {introPosts.length === INRO_POSTS_COUNT && (
+        <IntroSection posts={introPosts?.slice(0, INRO_POSTS_COUNT)} />
+      )}
+      <div className="flex flex-col gap-6 mt-8">
+        {posts
+          ?.slice(INRO_POSTS_COUNT)
+          ?.map(({ id, title: _title, image, markdown }) => (
+            <PostListItem
+              id={id}
+              title={_title}
+              image={image}
+              markdown={markdown}
             />
-            <p className="text-md">{removeQuotes(title)}</p>
-          </a>
-        );
-      })}
-    </>
+          ))}
+      </div>
+    </div>
   );
 }

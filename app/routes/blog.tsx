@@ -4,9 +4,9 @@ import { Header } from "~/components/Header";
 
 export default function Blog() {
   return (
-    <div className="w-[780px] flex flex-col p-4 overflow-auto justify-center items-center">
+    <div className="w-full flex flex-col overflow-auto justify-center items-center">
       <Header />
-      <div className="flex flex-col gap-2 mt-2 w-full">
+      <div className="flex flex-col gap-2 mt-[80px] w-full">
         <Outlet />
       </div>
       <Footer />
