@@ -1,8 +1,5 @@
-import { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
+import { ActionFunctionArgs } from "@remix-run/node";
 import { json, useLoaderData } from "@remix-run/react";
-
-import { Footer } from "~/components/Footer";
-import { Header } from "~/components/Header";
 
 import { createUser, getUsers } from "~/models/user";
 
@@ -21,7 +18,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   return json({ message: "User created" });
 };
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
+export const loader = async () => {
   const users = await getUsers();
 
   return json({
@@ -33,8 +30,7 @@ export default function Users() {
   const { users } = useLoaderData<typeof loader>();
 
   return (
-    <div className="w-[780px] flex flex-col p-4 overflow-auto justify-center items-center">
-      <Header />
+    <>
       {users.map((user) => user.username)}
       <form className="flex flex-col gap-2" method="post" action="/users">
         <input type="text" name="username" />
@@ -43,7 +39,6 @@ export default function Users() {
           Submit
         </button>
       </form>
-      <Footer />
-    </div>
+    </>
   );
 }

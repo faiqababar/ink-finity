@@ -3,8 +3,6 @@ import { Await, useLoaderData } from "@remix-run/react";
 
 import { Suspense } from "react";
 import BlogPost from "~/components/BlogPost";
-import { Footer } from "~/components/Footer";
-import { Header } from "~/components/Header";
 import { generateArticle } from "~/functions/generateArticle";
 import { generateImage } from "~/functions/generateImage";
 import { generateTitle } from "~/functions/generateTitle";
@@ -29,17 +27,13 @@ export default function GeneratePost() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <div className="w-[780px] flex flex-col p-4 overflow-auto justify-center items-center">
-      <Header />
-      <Suspense fallback={<div>Loading...</div>}>
-        <Await resolve={data}>
-          {(data) => {
-            const { title, markdown, image } = data.post;
-            return <BlogPost title={title} markdown={markdown} image={image} />;
-          }}
-        </Await>
-      </Suspense>
-      <Footer />
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Await resolve={data}>
+        {(data) => {
+          const { title, markdown, image } = data.post;
+          return <BlogPost title={title} markdown={markdown} image={image} />;
+        }}
+      </Await>
+    </Suspense>
   );
 }

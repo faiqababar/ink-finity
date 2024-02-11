@@ -1,8 +1,9 @@
+import { CHAT_GPT_MODEL } from "~/constants";
 import { openai } from "~/root";
 
 export const generateArticle = async (topic: string) => {
   const articleResponse = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo",
+    model: CHAT_GPT_MODEL,
     messages: [
       {
         role: "user",

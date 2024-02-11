@@ -4,7 +4,7 @@ import { faRobot } from "@fortawesome/free-solid-svg-icons";
 export const Header = () => {
   return (
     <a
-      href={"/posts"}
+      href={"/blog/posts"}
       className="flex flex-col w-full justify-center items-center bg-white border-[1.5px] border-black rounded-lg py-4 px-2"
     >
       <h1 className="text-3xl">Ink-finity</h1>
